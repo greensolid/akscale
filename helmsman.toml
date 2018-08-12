@@ -6,6 +6,7 @@ description = "Azure Kubernetes Autoscaling Service"
 [settings]
 kubeContext = "kube-system"
 storageBackend = "secret"
+serviceAccount = "tiller"
 
 [namespaces]
     [namespaces.akscale]
