@@ -1,5 +1,7 @@
 #! /bin/bash -v
 
+set -x
+
 mkdir -pv charts
 
 if [ -z ${CIRCLE_PR_REPONAME+x} ] || [ "$CIRCLE_BRANCH" != "master" ]; then
