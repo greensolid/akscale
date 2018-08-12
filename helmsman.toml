@@ -24,11 +24,11 @@ storageBackend = "configMap"
     protected = false
     priority= -2
     wait = true
-    [apps.akscale.set.azure] # values to override values from values.yaml with values from env vars or directly entered
-         clientID = "$CLIENT_ID"
-         clientSecret = "$CLIENT_SECRET"
-         resourceGroup = "$AKS_RESOURCE_GROUP"
-         subscriptionID = "$SUBSCRIPTION_ID"
-         tenantID = "$AZURE_TENANT_ID"
-         clusterName = "$AKS_CLUSTER_NAME"
-         nodeResourceGroup = "$NODE_RESOURCE_GROUP"
+    [apps.akscale.set] # values to override values from values.yaml with values from env vars or directly entered
+         azureClientID = "$CLIENT_ID"
+         azureClientSecret = "$CLIENT_SECRET"
+         azureResourceGroup = "$AKS_RESOURCE_GROUP"
+         azureSubscriptionID = "$SUBSCRIPTION_ID"
+         azureTenantID = "$AZURE_TENANT_ID"
+         azureClusterName = "$AKS_CLUSTER_NAME"
+         azureNodeResourceGroup = "$NODE_RESOURCE_GROUP"
