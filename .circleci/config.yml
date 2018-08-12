@@ -31,9 +31,7 @@ jobs:
         name: Init Helm
     - run:
         command: |
-          chmod +x ./get-secrets.sh
           chmod +x ./deploy.sh
-          bash ./get-secrets.sh
           bash ./deploy.sh
         name: Fetch secrets and apply Helm chart
     - run:
