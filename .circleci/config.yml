@@ -27,10 +27,6 @@ jobs:
         name: Get Kubernetes credentials
     - run:
         command: |
-          helm init --upgrade
-        name: Init Helm
-    - run:
-        command: |
           chmod +x ./deploy.sh
           bash ./deploy.sh
         name: Fetch secrets and apply Helm chart
@@ -43,6 +39,7 @@ jobs:
         key: kube-{{ .Revision }}
         paths:
         - ~/.kube
+        - ~/.helm
 workflows:
   version: 2
   deploy:
