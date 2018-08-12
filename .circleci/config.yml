@@ -1,0 +1,53 @@
+version: 2
+
+defaults: &defaults
+  docker:
+  - image: gofunky/helmstroup:latest
+
+jobs:
+  deploy:
+    <<: *defaults
+    steps:
+    - checkout
+    - run:
+        command: |
+          chmod +x ./check-vars.sh
+          bash ./check-vars.sh
+        name: Check environment variables
+    - restore_cache:
+        key: kube-
+    - run:
+        command: az aks install-cli
+        name: Install Azure cli tools
+    - run:
+        command: az login --service-principal -u $AZURE_TENANT_ID -p $AZURE_TENANT_PASS --tenant $AZURE_TENANT
+        name: Login to Azure
+    - run:
+        command: az aks get-credentials --resource-group $AKS_RESOURCE_GROUP --name $AKS_CLUSTER_NAME
+        name: Get Kubernetes credentials
+    - run:
+        command: |
+          helm init --upgrade
+        name: Init Helm
+    - run:
+        command: |
+          chmod +x ./get-secrets.sh
+          bash ./get-secrets.sh
+          mkdir -pv charts
+          helmsman -apply -f helmsman.toml
+        name: Fetch secrets and apply Helm chart
+    - run:
+        command: |
+          sleep 10
+          kubectl -n kube-system describe configmap cluster-autoscaler-status
+        name: Check Kubernetes status
+    - save_cache:
+        key: kube-{{ .Revision }}
+        paths:
+        - ~/.kube
+workflows:
+  version: 2
+  deploy:
+    jobs:
+    - deploy:
+        context: azure-kubernetes

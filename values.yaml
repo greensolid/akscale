@@ -1,0 +1,12 @@
+# Default values for akscale.
+
+nodes:
+  min: 1
+  max: 5
+  pool: "agentpool"
+
+image:
+  repository: cluster-autoscaler
+  tag: v1.3.1
+  registry: k8s.gcr.io
+  pullPolicy: Always
