@@ -1,4 +1,6 @@
-#! /bin/bash
+#! /bin/bash -v
+
+set -x
 
 function assert_var_not_null() {
   local fatal var num_null=0
