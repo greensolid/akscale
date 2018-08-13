@@ -4,9 +4,8 @@ maintainer = "matfax (mat@fax.fyi)"
 description = "Azure Kubernetes Autoscaling Service"
 
 [settings]
-kubeContext = "akscale"
+kubeContext = "$AKS_CLUSTER_NAME"
 storageBackend = "secret"
-serviceAccount = "akscale-sa"
 
 [namespaces]
     [namespaces.akscale]
